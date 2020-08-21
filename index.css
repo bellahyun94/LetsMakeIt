@@ -1,0 +1,12 @@
+body {
+  font-family: sans-serif;
+}
+
+.js-greeting,
+.js-paint-greeting {
+  display: none;
+}
+
+.showing {
+  display: block;
+}
