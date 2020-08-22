@@ -3,19 +3,28 @@
   <head>
     <title>Parcel Sandbox</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
     <div class="js-clock">
       <h1 class="js-clock__title">00:00:00</h1>
     </div>
-    <form class="js-greeting">
+    <form class="js-greeting greeting">
       <input
         class="js-greeting__input"
         type="text"
         placeholder="What's your name?"
       />
     </form>
-    <span class="js-paint-greeting"></span>
+    <span class="js-paint-greeting paint"></span>
+    <form class="js-toDo__form">
+      <input
+        class="js-toDo__input"
+        type="text"
+        placeholder="Today's To Do List"
+      />
+    </form>
+    <ul class="js-toDo__ul"></ul>
     <h1 class="js-select__title">Where are you from?</h1>
     <select class="js-select">
       <option value="NONE">--- Choose Your Country ---</option>
@@ -27,5 +36,6 @@
     <script src="index.js"></script>
     <script src="clock.js"></script>
     <script src="greeting.js"></script>
+    <script src="todo.js"></script>
   </body>
 </html>

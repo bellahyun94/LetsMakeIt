@@ -2,8 +2,8 @@ body {
   font-family: sans-serif;
 }
 
-.js-greeting,
-.js-paint-greeting {
+.greeting,
+.paint {
   display: none;
 }
 
