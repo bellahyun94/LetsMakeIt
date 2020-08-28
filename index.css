@@ -9,3 +9,10 @@ body {
 .showing {
   display: block;
 }
+.bgImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 50%;
+  z-index: -1;
+}
