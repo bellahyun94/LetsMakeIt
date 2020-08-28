@@ -1,31 +1,48 @@
 const toDoForm = document.querySelector(".js-toDo__form"),
-  toDoInput = toDoForm.querySelector(".js-toDo__input"),
+  toDoInput = document.querySelector(".js-toDo__input"),
   toDoUl = document.querySelector(".js-toDo__ul");
 
 const LS_TODOS = "loadedToDos";
-const toDo = [];
+let toDos = [];
 
-function saveToDos(toDo) {
-  localStorage.setItem(LS_TODOS, JSON.stringify(toDo));
+function deleteToDo(event) {
+  const selectedBtn = event.target;
+  const fatherLi = selectedBtn.parentNode;
+  toDoUl.removeChild(fatherLi);
+  const cleanedToDos = toDos.filter(function (toDo) {
+    return toDo.id !== parseInt(fatherLi.id);
+  });
+  toDos = cleanedToDos;
+  saveToDos();
+}
+
+function saveToDos() {
+  localStorage.setItem(LS_TODOS, JSON.stringify(toDos));
 }
 
 function paintToDos(text) {
-  const toDoLi = document.createElement("li"),
+  const toDoli = document.createElement("li"),
     toDoDelBtn = document.createElement("button"),
     toDoSpan = document.createElement("span");
-  const newId = toDo.length + 1;
+  toDoDelBtn.addEventListener("click", deleteToDo);
+
+  const newId = toDos.length + 1;
+
   toDoDelBtn.innerText = "😛";
-  toDoSpan.innerText = text;
-  toDoLi.id = newId;
-  toDoLi.appendChild(toDoDelBtn);
-  toDoLi.appendChild(toDoSpan);
-  toDoUl.appendChild(toDoLi);
+  toDoSpan.innerHTML = text;
+  toDoli.id = newId;
+
+  toDoli.appendChild(toDoDelBtn);
+  toDoli.appendChild(toDoSpan);
+  toDoUl.appendChild(toDoli);
+
   const toDoOj = {
-    text: text,
     id: newId,
+    text: text,
   };
-  toDo.push(toDoOj);
-  saveToDos(toDo);
+
+  toDos.push(toDoOj);
+  saveToDos();
 }
 
 function handleSubmit(event) {
@@ -39,7 +56,7 @@ function loadToDos() {
   const loadedToDos = localStorage.getItem(LS_TODOS);
   if (loadedToDos !== null) {
     const parsedToDos = JSON.parse(loadedToDos);
-    parsedToDos.forEach(function printToDos(toDo) {
+    parsedToDos.forEach(function (toDo) {
       paintToDos(toDo.text);
     });
   }
